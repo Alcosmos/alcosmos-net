@@ -1,7 +1,7 @@
 <?php
 	/*\
 	 * Prints the current formatted date
-	 * 
+	 *
 	 * A part of alcosmos.ddns.net
 	\*/
 	
