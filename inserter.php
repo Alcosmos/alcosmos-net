@@ -1,6 +1,6 @@
 <?php
 	/*\
-	 * Reads the images in a given directory and inserts them as emotes in the database with the same name
+	 * Reads the images in a given directory and inserts them as emotes into the database with the same name
 	 * Intended for alcosmos.ddns.net?tool=emotes
 	 * 
 	 * A part of alcosmos.ddns.net
