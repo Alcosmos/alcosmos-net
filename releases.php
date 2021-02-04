@@ -2,7 +2,7 @@
 	/*\
 	 * Lists the repositories from the given GitHub account along with some data about them
 	 * Structured and formatted for alcosmos.ddns.net?tab=releases
-	 * 
+	 *
 	 * A part of alcosmos.ddns.net
 	\*/
 	
