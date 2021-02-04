@@ -2,7 +2,7 @@
 	/*\
 	 * Lists the repositories from the given GitHub account along with some data about them
 	 * Structured and formatted for alcosmos.ddns.net?tab=releases
-	 *
+	 * 
 	 * A part of alcosmos.ddns.net
 	\*/
 	
@@ -10,7 +10,7 @@
 				
 				if ($repos === FALSE) {
 					echo '<p>
-						Sorry, GitHub limits their API to only 5000 requests per hour, and my website has already reached that number.
+						Bad news; GitHub limits their API to only 5000 requests per hour, and my website has already reached that number.
 					</p>
 					<p>
 						Just go straight to <a href="https://github.com/Alcosmos" target="_blank">my GitHub</a>.
