@@ -6,19 +6,22 @@
 	 * A part of alcosmos.ddns.net
 	\*/
 	
-				$repos = file_get_contents('https://api.github.com/users/Alcosmos/repos'); # ('data/repos');
+				$reposURL = file_get_contents('https://api.github.com/users/Alcosmos/repos'); # ('data/repos');
 				
-				if ($repos === FALSE) {
+				if ($reposURL === FALSE) {
 					echo '<p>
 						Bad news; GitHub limits their API to only 5000 requests per hour, and my website has already reached that number.
 					</p>
 					<p>
 						Just go straight to <a href="https://github.com/Alcosmos" target="_blank">my GitHub</a>.
 					</p>';
+					
 					return;
 				}
 				
 				$i = 1;
+				
+				$repos = json_decode($reposURL, true);
 				
 				foreach ($repos as $value) {
 					print('
