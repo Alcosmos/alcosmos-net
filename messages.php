@@ -39,19 +39,19 @@
 			$handlers = $responses;
 			
 			while (true) {
-				$pos = strpos($handlers, 'tMsgs.setaProp(');
+				$pos = strpos($responses, 'tCmds.setaProp("');
 				
 				if ($pos === false) {
 					break;
 				}
 				
-				$handlers = substr($handlers, $pos + 15);
-				$cont = explode(')', $handlers, 2)[0];
+				$responses = substr($responses, $pos + 16);
+				$cont = explode(')', $responses, 2)[0];
 				
-				$parts = explode(',', $cont, 2);
+				$parts = explode('"', $cont, 2);
 				
-				$id = $parts[0];
-				$name = substr($parts[1], 2);
+				$id = substr($parts[1], 2);
+				$name = $parts[0];
 				
 				$query = $pdo -> prepare("INSERT INTO messages_requests (id, base64, name) VALUES (?, '', ?);");
 				$query -> bindParam(1, $id, PDO::PARAM_INT);
@@ -71,20 +71,20 @@
 			// Responses
 			
 			while (true) {
-				$pos = strpos($responses, 'tCmds.setaProp("');
+				$pos = strpos($handlers, 'tMsgs.setaProp(');
 				
 				if ($pos === false) {
 					break;
 				}
 				
-				$responses = substr($responses, $pos + 16);
-				$cont = explode(')', $responses, 2)[0];
+				$handlers = substr($handlers, $pos + 15);
+				$cont = explode(')', $handlers, 2)[0];
 				
-				$parts = explode('"', $cont, 2);
+				$parts = explode(',', $cont, 2);
 				
-				$id = substr($parts[1], 3);
-				$name = $parts[0];
-				echo $id.' '.$name.'<br>';
+				$id = $parts[0];
+				$name = substr($parts[1], 2);
+				
 				$query = $pdo -> prepare("INSERT INTO messages_responses (id, base64, name, file) VALUES (?, '', ?, ?);");
 				$query -> bindParam(1, $id, PDO::PARAM_INT);
 				$query -> bindParam(2, $name, PDO::PARAM_STR);
