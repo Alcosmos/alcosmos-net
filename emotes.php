@@ -1,16 +1,22 @@
 <?php
 	/*\
-	 * Reads the images in a given directory and inserts them as emotes into the database with the same name
+	 * Reads the images in a given directory and inserts them as emotes in the database with the same name
 	 * Intended for alcosmos.ddns.net?tool=emotes
 	 * 
 	 * A part of alcosmos.ddns.net
 	\*/
 	
 	if (true) { // True to NOT execute
+		echo "Tool disabled";
+		
 		return;
 	}
 	
-	$route = '../public/emotes/img/2/3/';
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+	
+	$route = '../public/emotes/img/4/10/';
 	
 	include('../../../config.php');
 	
@@ -41,7 +47,7 @@
 	
 	echo '<br>';
 	
-	$currentDate = date('F j, Y H:i \(T O, e\)');
+	$currentDate = date('Y, F j H:i \(T O, e\)');
 	
 	$query = $pdo -> prepare("UPDATE config SET value = ? WHERE id = 'update_emotes';");
 	$query -> bindParam(1, $currentDate, PDO::PARAM_STR);
