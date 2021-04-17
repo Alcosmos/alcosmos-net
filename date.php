@@ -5,5 +5,5 @@
 	 * A part of alcosmos.ddns.net
 	\*/
 	
-	echo date('F j, Y H:i \(T O, e\)');
+	echo date('Y, F j H:i \(T O, e\)');
 ?>
