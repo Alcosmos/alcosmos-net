@@ -7,10 +7,16 @@
 	\*/
 	
 	if (true) { // True to NOT execute
+		echo "Tool disabled";
+		
 		return;
 	}
 	
-	$route = 'v17/src/';
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+	
+	$route = 'v17/src/'; // 'E:/ALCOSMOSPROJECTS/Cosas Retro/ccts/habbo_src-master/habbo_src-master/v17/src/';
 	
 	include('../../../config.php');
 	
