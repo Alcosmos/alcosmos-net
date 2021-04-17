@@ -1,0 +1,101 @@
+<?php
+	/*\
+	 * Gets the repositories from the given GitHub account along with data about them and inserts them into the databasse
+	 * 
+	 * A part of alcosmos.ddns.net
+	\*/
+	
+				if (true) { // True to NOT execute
+					echo "Tool disabled";
+					
+					return;
+				}
+				
+				ini_set('display_errors', 1);
+				ini_set('display_startup_errors', 1);
+				error_reporting(E_ALL);
+				
+				$opts = [
+					'http' => [
+						'method' => 'GET',
+						'header' => [
+							'User-Agent: Alcosmos'
+						]
+					]
+				];
+				
+				$context = stream_context_create($opts);
+				
+				$reposURL = file_get_contents('https://api.github.com/users/Alcosmos/repos', false, $context); # ('data/repos');
+				$repo = '';
+				
+				if ($reposURL === FALSE) {
+					
+					$repo = $repo.'<p>
+						Bad news; GitHub limits their API to only 5000 requests per hour, and my website has already reached that number.
+					</p>
+					<p>
+						Just go straight to <a href="https://github.com/Alcosmos" target="_blank">my GitHub</a>.
+					</p>';
+					
+					return;
+				}
+				
+				$i = 1;
+				
+				$repos = json_decode($reposURL, true);
+				
+				foreach ($repos as $value) {
+					$repo = $repo.'
+			<p class="title">
+				' . $value['name'] . '
+			</p>
+			<p>
+				<b>&nbsp;';
+				
+				if ($value['language'] != '') {
+					$repo = $repo.$value['language'].', ';
+				}
+				
+				if (isset($value['license']['name'])) {
+					$license = json_decode(file_get_contents($value['license']['url']), true);
+					
+					if (isset($license['html_url'])) {
+						$repo = $repo.'<a href="' . $license['html_url'] . '" target="_blank">' . $value['license']['name'] . '</a>';
+					} else {
+						$repo = $repo.$value['license']['name'];
+					}
+				} else {
+					$repo = $repo.'public domain';
+				}
+
+				$repo = $repo.'</a></b>
+			</p>
+			<p>
+				' . $value['description'] . '
+			</p>
+			<p>
+				<a href="' . $value['html_url'] . '" target="_blank">GitHub</a> | <a href="' . $value['html_url'] . '/archive/' . $value['default_branch'] . '.zip" target="_blank">Download</a>
+			</p>';
+					
+					if ($i < count($repos)) {
+						$repo = $repo.'<hr>';
+					}
+					
+					$i++;
+				}
+				
+				include('../../../config.php');
+				
+				$query = $pdo -> prepare("UPDATE config SET value = ? WHERE id = 'releases';");
+				$query -> bindParam(1, $repo, PDO::PARAM_STR);
+				if ($query -> execute()) {
+					echo 'Releases updated to the following:<br>';
+				} else {
+					echo '<b>ERROR</b> updating releases:';
+					print_r($query->errorInfo());
+					echo '<br>';
+				}
+				
+				print $repo;
+?>
