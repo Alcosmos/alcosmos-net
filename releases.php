@@ -3,7 +3,7 @@
 	 * Lists the repositories from the database
 	 * Structured and formatted for alcosmos.ddns.net?tab=releases
 	 * 
-	 * A part of alcosmos.ddns.net
+	 * A part of alcosmos.net
 	\*/
 	
 				$query = $pdo -> prepare("SELECT * FROM config WHERE id = ?;");
