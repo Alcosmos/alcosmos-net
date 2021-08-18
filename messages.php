@@ -1,9 +1,9 @@
 <?php
 	/*\
 	 * Scans the subdirectories in a given directory in search of Habbo handlers and responses written in Lingo and inserts them into the database
-	 * Intended for alcosmos.ddns.net?tab=habbodev&page=messages
+	 * Intended for alcosmos.net?tab=habbodev&page=messages
 	 * 
-	 * A part of alcosmos.ddns.net
+	 * A part of alcosmos.net
 	\*/
 	
 	if (true) { // True to NOT execute
