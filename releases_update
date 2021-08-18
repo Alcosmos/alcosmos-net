@@ -2,7 +2,7 @@
 	/*\
 	 * Gets the repositories from the given GitHub account along with data about them and inserts them into the databasse
 	 * 
-	 * A part of alcosmos.ddns.net
+	 * A part of alcosmos.net
 	\*/
 	
 				if (true) { // True to NOT execute
